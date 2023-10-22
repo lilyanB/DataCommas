@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useSDK } from "@metamask/sdk-react-ui";
 
