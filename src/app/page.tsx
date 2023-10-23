@@ -19,14 +19,6 @@ export default function Home() {
             <div>Waiting for Metamask to link the connection...</div>
           )}
         </div>
-        <div className="sdkConfig">
-          {connected && (
-            <>
-              <div>You are connected</div>
-              <div>With this account: {account}</div>
-            </>
-          )}
-        </div>
       </div>
     </main>
   )
