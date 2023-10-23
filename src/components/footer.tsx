@@ -8,7 +8,7 @@ export default function Footer() {
             <Link
                 href="https://github.com/lilyanB/DataCommas"
                 target="_blank"
-                className="text-blue-500 hover:text-blue-600"
+                className="text-black hover:text-white"
             >
                 us
             </Link>

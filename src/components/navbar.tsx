@@ -5,29 +5,34 @@ import Link from "next/link";
 import { MetaMaskButton } from "@metamask/sdk-react-ui";
 
 export default function Navbar() {
-
     return (
-        <div className="w-full px-6 border-b border-b-gray-700 py-2 flex justify-between items-center">
-            <div className="gap-4 flex">
-                <Link href={"/"}>
+        <nav className="text-white p-4">
+            <div className="container mx-auto flex justify-between items-center">
+                <Link href="/">
                     <Image
-                        src={"/logo.png"}
+                        src="/logo.png"
                         width={60}
                         height={40}
-                        className="mr-12"
-                        alt={""}
-                        style={{ width: "60px", height: "40px" }}
+                        alt="Logo"
+                        className="mr-4"
                     />
                 </Link>
-                <Link href="/wallet" className="hover:underline">
-                    wallet
-                </Link>
-                <Link href="/Analytics" className="hover:underline">
-                    Analytics
-                </Link>
-            </div>
-            <MetaMaskButton theme={"dark"} color="white"></MetaMaskButton>
 
-        </div>
+                <ul className="flex space-x-6">
+                    <li>
+                        <Link href="/wallet" className="border border-white rounded px-4 py-2 hover:border-blue-500 hover:underline">
+                            Wallet
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/analytics" className="border border-white rounded px-4 py-2 hover:border-blue-500 hover:underline">
+                            Analytics
+                        </Link>
+                    </li>
+                </ul>
+
+                <MetaMaskButton theme="dark" color="white" />
+            </div>
+        </nav>
     );
 }
