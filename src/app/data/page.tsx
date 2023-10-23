@@ -1,13 +1,17 @@
+"use client"
+
+import { useState } from "react";
+
 export default function Page() {
-    const fetchTransactions = async () => {
-        const response = await fetch("/api/all", {
-            method: "GET"
-        });
-        const data = await response.json();
-        console.log(data)
-    };
+    const [data, setData] = useState(null);
 
-    fetchTransactions()
-
-    return <h1>Hello, Data page!</h1>
+    return (
+        <div>
+            {data ? (
+                <h1>Data Fetched: {data}</h1>
+            ) : (
+                <h1>Loading...</h1>
+            )}
+        </div>
+    );
 }

@@ -1,5 +1,9 @@
 # DataCommas
 
+## Informations
+
+NodeJS need at least 18.3
+
 ## Getting Started
 
 First, run the development server:
