@@ -45,7 +45,7 @@ export default function Transactions() {
     return (
         <TabPanel>
             <Card className="max-w-xl">
-                <Title>List of Swiss Federal Councillours</Title>
+                <Title>All your recent transactions</Title>
                 <Table className="mt-5">
                     <TableHead>
                         <TableRow>

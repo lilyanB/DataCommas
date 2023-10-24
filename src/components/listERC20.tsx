@@ -1,7 +1,7 @@
 "use client";
 
 import { useSDK } from "@metamask/sdk-react-ui";
-import { Flex, TabPanel, Text } from "@tremor/react";
+import { Card, Flex, TabPanel, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { erc20tokens } from "@/outils/getData";
 
@@ -36,17 +36,20 @@ export default function ListERC20() {
 
     return (
         <TabPanel>
-            <div className="mt-10">
-                {assetsName.map((name, index) => (
-                    <Flex key={index} className="mt-4">
-                        <Text className="w-full">{name}</Text>
-                        <Flex className="space-x-2" justifyContent="end">
-                            <Text>{`$ ${amounts[index]}`}</Text>
-                            <Text>{`${assetsSymbol[index]}`}</Text>
+            <Card className="max-w-xl">
+                <Title>All your ERC20</Title>
+                <div className="mt-10">
+                    {assetsName.map((name, index) => (
+                        <Flex key={index} className="mt-4">
+                            <Text className="w-full">{name}</Text>
+                            <Flex className="space-x-2" justifyContent="end">
+                                <Text>{`$ ${amounts[index]}`}</Text>
+                                <Text>{`${assetsSymbol[index]}`}</Text>
+                            </Flex>
                         </Flex>
-                    </Flex>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </Card>
         </TabPanel>
     );
 }

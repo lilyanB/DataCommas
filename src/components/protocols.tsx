@@ -1,7 +1,7 @@
 "use client";
 
 import { useSDK } from "@metamask/sdk-react-ui";
-import { Flex, TabPanel, Text } from "@tremor/react";
+import { Card, Flex, TabPanel, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { protocols } from "@/outils/getData";
 
@@ -31,14 +31,17 @@ export default function Protocols() {
 
     return (
         <TabPanel>
-            <div className="mt-10">
-                {name.map((nameValue, index) => (
-                    <Flex key={index} className="mt-4">
-                        <Text className="w-full">{nameValue[index]}</Text>
-                        <Text>{position[index]}</Text>
-                    </Flex>
-                ))}
-            </div>
+            <Card className="max-w-xl">
+                <Title>Your différent position in protocols (AAVE (v2 & v3), Uniswap (v2), Lido, Compound (v2), Liquity, InstaDapp)</Title>
+                <div className="mt-10">
+                    {name.map((nameValue, index) => (
+                        <Flex key={index} className="mt-4">
+                            <Text className="w-full">{nameValue[index]}</Text>
+                            <Text>{position[index]}</Text>
+                        </Flex>
+                    ))}
+                </div>
+            </Card>
         </TabPanel>
     );
 }
