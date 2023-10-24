@@ -6,6 +6,11 @@ import { all_tokens_metada } from "@/outils/getData";
 import DonutsERC20 from "./donutsERC20";
 
 export default function AllTokens() {
+    interface Token {
+        name: string;
+        symbol: string;
+        address: string;
+    }
     const [tokens, setTokens] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -45,7 +50,7 @@ export default function AllTokens() {
                     <TabPanels>
                         <TabPanel>
                             <List>
-                                {tokens.map((token, index) => (
+                                {tokens.map((token: Token, index) => (
                                     <ListItem key={index}>
                                         <span>{token.name}</span>
                                         <span>{token.symbol}</span>
