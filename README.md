@@ -9,7 +9,7 @@ NodeJS need at least 18.3
 
 ## Overview:
 
-DataCommas is a transformative web and mobile application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations. Our platform offers two central features:
+DataCommas is a transformative web application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations. Our platform offers two central features:
 
 ## Wallet Visualization:
 
