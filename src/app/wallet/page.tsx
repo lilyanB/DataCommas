@@ -45,7 +45,7 @@ export default function Page() {
                                     </TabList>
                                     <TabPanels>
                                         <Transactions />
-                                        < ListERC20 />
+                                        <ListERC20 />
                                         <Protocols />
                                     </TabPanels>
                                 </TabGroup>
