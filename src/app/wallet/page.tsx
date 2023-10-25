@@ -23,18 +23,20 @@ export default function Page() {
             <div className="flex flex-col h-full gap-6 justify-center items-center">
                 <div className="sdkConfig">
                     {connected == false && (
-                        <div>Connect your wallet to display information</div>
+                        <Card>
+                            <Title>Connect your wallet to display information</Title></Card>
                     )}
                 </div>
                 <div className="sdkConfig">
                     {connecting && (
-                        <div>Waiting for Metamask to link the connection...</div>
+                        <Card>
+                            <Title>Waiting for Metamask to link the connection...</Title></Card>
                     )}
                 </div>
                 <div className="sdkConfig">
                     {connected && (
                         <>
-                            <Card>
+                            <Card className="">
                                 <Title>You are connected</Title>
                                 <Badge size="xl">{account}</Badge>
                                 <TabGroup>

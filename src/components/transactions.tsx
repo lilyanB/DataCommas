@@ -44,7 +44,7 @@ export default function Transactions() {
 
     return (
         <TabPanel>
-            <Card className="max-w-xl">
+            <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
                 <Title>All your recent transactions</Title>
                 <Table className="mt-5">
                     <TableHead>
