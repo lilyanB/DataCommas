@@ -59,7 +59,11 @@ export default function AllTokens() {
                                 ))}
                             </List>
                         </TabPanel>
-                        {!loading && <DonutsERC20 tokens={tokens} />}
+                        {!loading &&
+                            <TabPanel>
+                                <DonutsERC20 tokens={tokens} />
+                            </TabPanel>
+                        }
                     </TabPanels>
                 </TabGroup>
             </Card>

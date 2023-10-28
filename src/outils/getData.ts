@@ -28,6 +28,6 @@ export async function all_tokens_metada(networks: string) {
 }
 
 export async function tokens_holders(address: string,networks: string) {
-    const res = await axios.get(`${baseURL}token_holders/${networks}/${address}?api-key=${API}`)
+    const res = await axios.get(`${baseURL}token_holders/${networks}/${address}?api-key=${API}&limit=100`)
     return res.data
 }

@@ -26,6 +26,7 @@ const products: ProductType[] = [
 const socialLinks: Social[] = [
     { imgsrc: '/images/Footer/insta.svg', href: "https://instagram.com/" },
     { imgsrc: '/images/Footer/twitter.svg', href: "https://twitter.com/" },
+    { imgsrc: '/images/Footer/github.svg', href: "https://github.com/lilyanB/DataCommas" },
 ]
 
 
@@ -49,7 +50,7 @@ const footer = () => {
                         <h3 className='text-lightblue text-sm font-normal leading-9 mb-4 lg:mb-16'> DataCommas is a transformative web application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations.</h3>
                         <div className='flex gap-4'>
                             {socialLinks.map((items, i) => (
-                                <Link href={items.href} key={i}><img src={items.imgsrc} alt={items.imgsrc} className='footer-icons' /></Link>
+                                <Link href={items.href} target="_blank" key={i}><img src={items.imgsrc} alt={items.imgsrc} className='footer-icons' /></Link>
                             ))}
                         </div>
                     </div>
