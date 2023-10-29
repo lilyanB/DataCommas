@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar/index'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DataCommas',
+  title: 'Pulsar ',
   description: 'Deciphering Data, Simplifying Insights',
 }
 
