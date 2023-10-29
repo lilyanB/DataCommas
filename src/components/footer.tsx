@@ -26,7 +26,7 @@ const products: ProductType[] = [
 const socialLinks: Social[] = [
     { imgsrc: '/images/Footer/insta.svg', href: "https://instagram.com/" },
     { imgsrc: '/images/Footer/twitter.svg', href: "https://twitter.com/" },
-    { imgsrc: '/images/Footer/github.svg', href: "https://github.com/lilyanB/Pulsar " },
+    { imgsrc: '/images/Footer/github.svg', href: "https://github.com/lilyanB/Pulsar" },
 ]
 
 
@@ -47,7 +47,7 @@ const footer = () => {
                             width={60}
                             height={40}
                         />
-                        <h3 className='text-lightblue text-sm font-normal leading-9 mb-4 lg:mb-16'> Pulsar  is a transformative web application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations.</h3>
+                        <h3 className='text-lightblue text-sm font-normal leading-9 mb-4 lg:mb-16'> Pulsar is a transformative web application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations.</h3>
                         <div className='flex gap-4'>
                             {socialLinks.map((items, i) => (
                                 <Link href={items.href} target="_blank" key={i}><img src={items.imgsrc} alt={items.imgsrc} className='footer-icons' /></Link>
@@ -81,7 +81,7 @@ const footer = () => {
             {/* All Rights Reserved */}
 
             <div className='py-8 px-4 border-t border-t-lightblue'>
-                <h3 className='text-center text-offwhite'>@2023 - All Rights Reserved by <Link href="https://github.com/lilyanB/Pulsar " target="_blank"> Pulsar </Link></h3>
+                <h3 className='text-center text-offwhite'>@2023 - All Rights Reserved by <Link href="https://github.com/lilyanB/Pulsar" target="_blank"> Pulsar</Link></h3>
             </div>
 
         </div>

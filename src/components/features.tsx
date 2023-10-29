@@ -13,13 +13,13 @@ const workdata: workdata[] = [
         imgSrc: '/images/icon-two.svg',
         heading: 'Wallet Visualization',
         subheading: 'Erc20, NFT, and Transactions / User-Centric',
-        hiddenpara: 'Pulsar  offers a holistic view of your blockchain wallet, encompassing ERC20 tokens, NFTs, and transaction histories. We prioritize user-friendliness, ensuring individuals of all backgrounds can easily access and comprehend their wallet data.',
+        hiddenpara: 'Pulsar offers a holistic view of your blockchain wallet, encompassing ERC20 tokens, NFTs, and transaction histories. We prioritize user-friendliness, ensuring individuals of all backgrounds can easily access and comprehend their wallet data.',
     },
     {
         imgSrc: '/images/icon-three.svg',
         heading: 'Blockchain Data for Informed Decision-Making',
         subheading: 'Empowering Insights / High-Volume Analytics',
-        hiddenpara: 'Pulsar  equips users with data-driven insights, aiding them in making informed decisions within the blockchain space. Our platform can efficiently handle large datasets, making it a valuable tool for users with significant blockchain activities.',
+        hiddenpara: 'Pulsar equips users with data-driven insights, aiding them in making informed decisions within the blockchain space. Our platform can efficiently handle large datasets, making it a valuable tool for users with significant blockchain activities.',
     },
 
 ]
