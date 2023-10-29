@@ -154,3 +154,10 @@ th:last-child {
   top: 0%;
   z-index: -1;
 }
+
+.manageTabs {
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 5px 1px rgba(193, 193, 193, 0.35);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255);
+}

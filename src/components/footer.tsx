@@ -18,8 +18,8 @@ const products: ProductType[] = [
     {
         id: 1,
         section: "Useful Links",
-        name: ['Home', 'Wallet', 'Analytics'],
-        link: ['/', '/wallet', '/analytics']
+        name: ['Home', 'Wallet', 'Analytics', 'Pulsi'],
+        link: ['/', '/wallet', '/analytics', '/pulsi']
     }
 ]
 
