@@ -1,5 +1,5 @@
 # Pulsar
-![logo](public/banner.png)
+![logo](public/images/banner.png)
 
 # Decommas: Deciphering Data, Simplifying Insights
 
