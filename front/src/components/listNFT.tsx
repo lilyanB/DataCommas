@@ -3,19 +3,22 @@
 import React, { useEffect, useState } from "react";
 import { useSDK } from "@metamask/sdk-react-ui";
 import { TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
-import { erc20tokens } from "@/outils/getData";
+import { nfts } from "@/outils/getData";
+import Link from "next/link";
+import { networks } from "@/outils/networks";
 
-export default function ListERC20(props: { blockchain: string }) {
+export default function ListNFT(props: { blockchain: string }) {
     const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS;
     const { connected } = useSDK();
-    const [erc20Data, setErc20Data] = useState([]);
+    const [nftData, setNFTData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             if (connected && props.blockchain) {
                 try {
-                    const response = await erc20tokens(whale!, props.blockchain);
-                    setErc20Data(response.result);
+                    const response = await nfts(whale!, props.blockchain);
+                    console.log(response)
+                    setNFTData(response.result);
                 } catch (error) {
                     console.error("Error fetching ERC20 tokens:", error);
                 }
@@ -26,26 +29,32 @@ export default function ListERC20(props: { blockchain: string }) {
 
     return (
         <TabPanel>
-            <Title>All your ERC20</Title>
+            <Title>All your NFT</Title>
             <Table className="mt-5">
                 <TableHead>
                     <TableRow>
-                        <TableHeaderCell>name</TableHeaderCell>
+                        <TableHeaderCell>NFT address</TableHeaderCell>
                         <TableHeaderCell>amount</TableHeaderCell>
-                        <TableHeaderCell>symbol</TableHeaderCell>
+                        <TableHeaderCell>NFT type</TableHeaderCell>
+                        <TableHeaderCell>NFT token id</TableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {erc20Data.map((token: any, index) => (
+                    {nftData.map((token: any, index) => (
                         <TableRow key={index}>
                             <TableCell>
-                                <Text>{token.name}</Text>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}token/${token.contract_address}`} target="_blank" className="hover:text-white">
+                                    {token.contract_address}
+                                </Link>
                             </TableCell>
                             <TableCell>
-                                <Text>{`${token.amount}`}</Text>
+                                <Text>{token.amount}</Text>
                             </TableCell>
                             <TableCell>
-                                <Text>{`${token.symbol}`}</Text>
+                                <Text>{token.contract_type}</Text>
+                            </TableCell>
+                            <TableCell>
+                                <Text>{token.token_id}</Text>
                             </TableCell>
                         </TableRow>
                     ))}

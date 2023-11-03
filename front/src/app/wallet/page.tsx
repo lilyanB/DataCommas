@@ -1,6 +1,7 @@
 "use client";
 
 import ListERC20 from "@/components/listERC20";
+import ListNFT from "@/components/listNFT";
 import Protocols from "@/components/protocols";
 import Transactions from "@/components/transactions";
 import { networks } from "@/outils/networks";
@@ -57,11 +58,13 @@ export default function Page() {
                                     <TabList className="mt-8">
                                         <Tab>Transactions</Tab>
                                         <Tab>ERC20</Tab>
+                                        <Tab>NFT</Tab>
                                         <Tab>Protocols</Tab>
                                     </TabList>
                                     <TabPanels>
                                         <Transactions blockchain={selectedBlockchain} />
                                         <ListERC20 blockchain={selectedBlockchain} />
+                                        <ListNFT blockchain={selectedBlockchain} />
                                         <Protocols blockchain={selectedBlockchain} />
                                     </TabPanels>
                                 </TabGroup>
