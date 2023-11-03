@@ -31,17 +31,15 @@ export default function Protocols(props: { blockchain: string }) {
 
     return (
         <TabPanel>
-            <Card className="max-w-xl">
-                <Title>Your différent position in protocols (AAVE (v2 & v3), Uniswap (v2), Lido, Compound (v2), Liquity, InstaDapp)</Title>
-                <div className="mt-10">
-                    {name.map((nameValue, index) => (
-                        <Flex key={index} className="mt-4">
-                            <Text className="w-full">{nameValue[index]}</Text>
-                            <Text>{position[index]}</Text>
-                        </Flex>
-                    ))}
-                </div>
-            </Card>
+            <Title>Your différent position in protocols (AAVE (v2 & v3), Uniswap (v2), Lido, Compound (v2), Liquity, InstaDapp)</Title>
+            <div className="mt-10">
+                {name.map((nameValue, index) => (
+                    <Flex key={index} className="mt-4">
+                        <Text className="w-full">{nameValue[index]}</Text>
+                        <Text>{position[index]}</Text>
+                    </Flex>
+                ))}
+            </div>
         </TabPanel>
     );
 }

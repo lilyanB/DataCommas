@@ -16,7 +16,7 @@ interface Token {
     holders: Holder[]
 }
 
-export default function DonutsERC20(props: { tokens: Token[] }) {
+export default function DonutsERC20(props: { tokens: Token[], blockchain: string }) {
     const [selectedValue, setSelectedValue] = useState<any>(null);
     const [selectedToken, setSelectedToken] = useState<any>();
     const [tokenHolders, setTokenHolders] = useState<any>();
@@ -30,7 +30,7 @@ export default function DonutsERC20(props: { tokens: Token[] }) {
             let decimal = 0;
             const tokenInfo = [];
 
-            const response = await tokens_holders(selectedToken.address, "Base");
+            const response = await tokens_holders(selectedToken.address, props.blockchain);
             const responseData = response.result
             for (var holderData of responseData) {
                 addressAndamount.push({

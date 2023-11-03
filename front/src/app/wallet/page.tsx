@@ -42,7 +42,7 @@ export default function Page() {
                 <div className="sdkConfig">
                     {connected && (
                         <>
-                            <Card className="">
+                            <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
                                 <Title>You are connected</Title>
                                 <Badge size="xl">{account}</Badge>
                                 <Title>Select Network</Title>
@@ -53,20 +53,18 @@ export default function Page() {
                                         </SelectItem>
                                     ))}
                                 </Select>
-                                {selectedBlockchain &&
-                                    <TabGroup>
-                                        <TabList className="mt-8">
-                                            <Tab>Transactions</Tab>
-                                            <Tab>ERC20</Tab>
-                                            <Tab>Protocols</Tab>
-                                        </TabList>
-                                        <TabPanels>
-                                            <Transactions blockchain={selectedBlockchain} />
-                                            <ListERC20 blockchain={selectedBlockchain} />
-                                            <Protocols blockchain={selectedBlockchain} />
-                                        </TabPanels>
-                                    </TabGroup>
-                                }
+                                <TabGroup>
+                                    <TabList className="mt-8">
+                                        <Tab>Transactions</Tab>
+                                        <Tab>ERC20</Tab>
+                                        <Tab>Protocols</Tab>
+                                    </TabList>
+                                    <TabPanels>
+                                        <Transactions blockchain={selectedBlockchain} />
+                                        <ListERC20 blockchain={selectedBlockchain} />
+                                        <Protocols blockchain={selectedBlockchain} />
+                                    </TabPanels>
+                                </TabGroup>
                             </Card>
                         </>
                     )}

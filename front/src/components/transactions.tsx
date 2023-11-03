@@ -45,41 +45,39 @@ export default function Transactions(props: { blockchain: string }) {
 
     return (
         <TabPanel>
-            <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
-                <Title>All your recent transactions</Title>
-                <Table className="mt-5">
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Hash</TableHeaderCell>
-                            <TableHeaderCell>From</TableHeaderCell>
-                            <TableHeaderCell>To</TableHeaderCell>
-                            <TableHeaderCell>Method</TableHeaderCell>
-                            <TableHeaderCell>Value</TableHeaderCell>
+            <Title>All your recent transactions</Title>
+            <Table className="mt-5">
+                <TableHead>
+                    <TableRow>
+                        <TableHeaderCell>Hash</TableHeaderCell>
+                        <TableHeaderCell>From</TableHeaderCell>
+                        <TableHeaderCell>To</TableHeaderCell>
+                        <TableHeaderCell>Method</TableHeaderCell>
+                        <TableHeaderCell>Value</TableHeaderCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {hash.map((hashValue, index) => (
+                        <TableRow key={index}>
+                            <TableCell>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}tx/${hash[index]}`} target="_blank" className="hover:text-white">{hash[index]}</Link>
+                            </TableCell>
+                            <TableCell>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${from[index]}`} target="_blank" className="hover:text-white">{from[index]}</Link>
+                            </TableCell>
+                            <TableCell>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${to[index]}`} target="_blank" className="hover:text-white">{to[index]}</Link>
+                            </TableCell>
+                            <TableCell>
+                                <Text>{method[index]}</Text>
+                            </TableCell>
+                            <TableCell>
+                                <Text>{value[index]}</Text>
+                            </TableCell>
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {hash.map((hashValue, index) => (
-                            <TableRow key={index}>
-                                <TableCell>
-                                    <Link href={`${networks[props.blockchain].explorer}tx/${hash[index]}`} target="_blank" className="hover:text-white">{hash[index]}</Link>
-                                </TableCell>
-                                <TableCell>
-                                    <Link href={`${networks[props.blockchain].explorer}address/${from[index]}`} target="_blank" className="hover:text-white">{from[index]}</Link>
-                                </TableCell>
-                                <TableCell>
-                                    <Link href={`${networks[props.blockchain].explorer}address/${to[index]}`} target="_blank" className="hover:text-white">{to[index]}</Link>
-                                </TableCell>
-                                <TableCell>
-                                    <Text>{method[index]}</Text>
-                                </TableCell>
-                                <TableCell>
-                                    <Text>{value[index]}</Text>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Card>
+                    ))}
+                </TableBody>
+            </Table>
         </TabPanel >
     );
 }

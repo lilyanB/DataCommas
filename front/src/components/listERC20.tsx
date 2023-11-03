@@ -36,20 +36,18 @@ export default function ListERC20(props: { blockchain: string }) {
 
     return (
         <TabPanel>
-            <Card className="max-w-xl">
-                <Title>All your ERC20</Title>
-                <div className="mt-10">
-                    {assetsName.map((name, index) => (
-                        <Flex key={index} className="mt-4">
-                            <Text className="w-full">{name}</Text>
-                            <Flex className="space-x-2" justifyContent="end">
-                                <Text>{`$ ${amounts[index]}`}</Text>
-                                <Text>{`${assetsSymbol[index]}`}</Text>
-                            </Flex>
+            <Title>All your ERC20</Title>
+            <div className="mt-10">
+                {assetsName.map((name, index) => (
+                    <Flex key={index} className="mt-4">
+                        <Text className="w-full">{name}</Text>
+                        <Flex className="space-x-2" justifyContent="end">
+                            <Text>{`$ ${amounts[index]}`}</Text>
+                            <Text>{`${assetsSymbol[index]}`}</Text>
                         </Flex>
-                    ))}
-                </div>
-            </Card>
+                    </Flex>
+                ))}
+            </div>
         </TabPanel>
     );
 }
