@@ -21,6 +21,12 @@ const workdata: workdata[] = [
         subheading: 'Empowering Insights / High-Volume Analytics',
         hiddenpara: 'Pulsar equips users with data-driven insights, aiding them in making informed decisions within the blockchain space. Our platform can efficiently handle large datasets, making it a valuable tool for users with significant blockchain activities.',
     },
+    {
+        imgSrc: '/images/icon-one.svg',
+        heading: 'Pulsi',
+        subheading: 'the Pulsar API',
+        hiddenpara: 'Simplify your communication management and stay connected with blockchain informations automatically and efficiently. Subscribe to the power of Pulsar. Customize your email dispatches at regular intervals based on your chosen subscription using the Pulsar.',
+    },
 
 ]
 
