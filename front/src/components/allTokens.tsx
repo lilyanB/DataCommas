@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, List, ListItem, Text, Select, SelectItem, Tab, TabGroup, TabList, TabPanel, TabPanels, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Title } from "@tremor/react";
+import { Card, Text, Select, SelectItem, Tab, TabGroup, TabList, TabPanel, TabPanels, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Title } from "@tremor/react";
 import { Key, useEffect, useState } from "react";
 import { all_tokens_metada } from "@/outils/getData";
 import DonutsERC20 from "./donutsERC20";

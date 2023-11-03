@@ -1,47 +1,30 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { useSDK } from "@metamask/sdk-react-ui";
-import { Card, TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
-import { useEffect, useState } from "react";
-import { transactions } from "@/outils/getData";
+import { TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
 import Link from "next/link";
 import { networks } from "@/outils/networks";
+import { transactions } from "@/outils/getData";
 
 export default function Transactions(props: { blockchain: string }) {
-    const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
-    const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
-    const [hash, setHash] = useState<string[]>([]);
-    const [from, setFrom] = useState<string[]>([]);
-    const [to, setTo] = useState<string[]>([]);
-    const [method, setMethod] = useState<string[]>([]);
-    const [value, setValue] = useState<string[]>([]);
+    const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS;
+    const { connected } = useSDK();
+    const [transactionsData, setTransactionsData] = useState([]);
 
     useEffect(() => {
-        if (connected && props.blockchain) {
-            const fetchNFTs = async () => {
-                const response = await transactions(whale!, props.blockchain)
-                const data = response.result
-                let hashs = []
-                let froms = []
-                let tos = []
-                let methods = []
-                let values = []
-                for (const element of data) {
-                    hashs.push(element.hash as string);
-                    froms.push(element.from_address as string);
-                    tos.push(element.to_address as string);
-                    methods.push(element.method as string);
-                    values.push(element.value as string);
+        const fetchData = async () => {
+            if (connected && props.blockchain) {
+                try {
+                    const response = await transactions(whale!, props.blockchain);
+                    setTransactionsData(response.result);
+                } catch (error) {
+                    console.error("Error fetching transactions:", error);
                 }
-                setHash(hashs)
-                setFrom(froms)
-                setTo(tos)
-                setMethod(methods)
-                setValue(values)
-            };
-            fetchNFTs()
-        }
-    }, [props.blockchain]);
+            }
+        };
+        fetchData();
+    }, [props.blockchain, connected]);
 
     return (
         <TabPanel>
@@ -57,27 +40,33 @@ export default function Transactions(props: { blockchain: string }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {hash.map((hashValue, index) => (
+                    {transactionsData.map((transaction: any, index) => (
                         <TableRow key={index}>
                             <TableCell>
-                                <Link href={`${(networks as any)[props.blockchain].explorer}tx/${hash[index]}`} target="_blank" className="hover:text-white">{hash[index]}</Link>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}tx/${transaction.hash}`} target="_blank" className="hover:text-white">
+                                    {transaction.hash}
+                                </Link>
                             </TableCell>
                             <TableCell>
-                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${from[index]}`} target="_blank" className="hover:text-white">{from[index]}</Link>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${transaction.from_address}`} target="_blank" className="hover:text-white">
+                                    {transaction.from_address}
+                                </Link>
                             </TableCell>
                             <TableCell>
-                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${to[index]}`} target="_blank" className="hover:text-white">{to[index]}</Link>
+                                <Link href={`${(networks as any)[props.blockchain].explorer}address/${transaction.to_address}`} target="_blank" className="hover:text-white">
+                                    {transaction.to_address}
+                                </Link>
                             </TableCell>
                             <TableCell>
-                                <Text>{method[index]}</Text>
+                                <Text>{transaction.method}</Text>
                             </TableCell>
                             <TableCell>
-                                <Text>{value[index]}</Text>
+                                <Text>{transaction.value}</Text>
                             </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-        </TabPanel >
+        </TabPanel>
     );
 }

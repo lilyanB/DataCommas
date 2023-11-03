@@ -1,45 +1,60 @@
 "use client";
 
 import { useSDK } from "@metamask/sdk-react-ui";
-import { Card, Flex, TabPanel, Text, Title } from "@tremor/react";
+import { Flex, TabPanel, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { protocols } from "@/outils/getData";
 
 export default function Protocols(props: { blockchain: string }) {
     const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
-    const [name, setName] = useState<string[]>([]);
-    const [position, setPosition] = useState<string[]>([]);
+    const [names, setNames] = useState<string[]>([]);
+    const [positions, setPositions] = useState<string[]>([]);
 
     useEffect(() => {
         if (connected && props.blockchain) {
             const fetchNFTs = async () => {
-                const response = await protocols(whale!, props.blockchain)
-                const data = response.result
-                let names = []
-                let positions = []
-                for (const element of data) {
-                    names.push(element.protocol_name as string);
-                    positions.push(element.position.asset_usd_value as string);
+                try {
+                    const response = await protocols(whale!, props.blockchain);
+                    const data = response.result;
+                    const names = data.map((element: { protocol_name: string; }) => element.protocol_name as string);
+                    const positions = data.map(
+                        (element: { position: { asset_usd_value: string; }; }) => element.position.asset_usd_value as string
+                    );
+                    setNames(names);
+                    setPositions(positions);
+                } catch (error) {
+                    console.error("Error fetching protocols:", error);
                 }
-                setName(names)
-                setPosition(positions)
             };
-            fetchNFTs()
+            fetchNFTs();
         }
-    }, [props.blockchain]);
+    }, [props.blockchain, connected]);
 
     return (
         <TabPanel>
-            <Title>Your différent position in protocols (AAVE (v2 & v3), Uniswap (v2), Lido, Compound (v2), Liquity, InstaDapp)</Title>
-            <div className="mt-10">
-                {name.map((nameValue, index) => (
-                    <Flex key={index} className="mt-4">
-                        <Text className="w-full">{nameValue[index]}</Text>
-                        <Text>{position[index]}</Text>
-                    </Flex>
+            <Title>
+                Your different positions in protocols (AAVE (v2 & v3), Uniswap (v2),
+                Lido, Compound (v2), Liquity, InstaDapp)
+            </Title>
+            <TableHead>
+                <TableRow>
+                    <TableHeaderCell>protocols</TableHeaderCell>
+                    <TableHeaderCell>value</TableHeaderCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {names.map((nameValue, index) => (
+                    <TableRow key={index}>
+                        <TableCell>
+                            <Text>{nameValue}</Text>
+                        </TableCell>
+                        <TableCell>
+                            <Text>{positions[index]}</Text>
+                        </TableCell>
+                    </TableRow>
                 ))}
-            </div>
+            </TableBody>
         </TabPanel>
     );
 }
