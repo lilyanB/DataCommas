@@ -40,13 +40,22 @@ const footer = () => {
                     {/* COLUMN-1 */}
 
                     <div className='col-span-6'>
-                        <img
-                            className="block h-12 w-20px mb-4"
-                            src={'/images/Logo/logo.png'}
-                            alt="Logo"
-                            width={60}
-                            height={40}
-                        />
+                        <div className="flex">
+                            <img
+                                className="block h-12 w-20px mb-4"
+                                src={'/images/Logo/logo.png'}
+                                alt="Logo"
+                                width={60}
+                                height={120}
+                            />
+                            <img
+                                className="block h-12 w-20px mb-4"
+                                src={'/images/Logo/logo2.png'}
+                                alt="Logo"
+                                width={500}
+                                height={120}
+                            />
+                        </div>
                         <h3 className='text-lightblue text-sm font-normal leading-9 mb-4 lg:mb-16'> Pulsar is a transformative web application with a mission to decode complex blockchain data, providing users with comprehensive insights and simplified visualizations.</h3>
                         <div className='flex gap-4'>
                             {socialLinks.map((items, i) => (
