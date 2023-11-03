@@ -5,16 +5,16 @@ import { Card, Flex, TabPanel, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { protocols } from "@/outils/getData";
 
-export default function Protocols() {
+export default function Protocols(props: { blockchain: string }) {
     const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
     const [name, setName] = useState<string[]>([]);
     const [position, setPosition] = useState<string[]>([]);
 
     useEffect(() => {
-        if (connected) {
+        if (connected && props.blockchain) {
             const fetchNFTs = async () => {
-                const response = await protocols(whale!, "Base")
+                const response = await protocols(whale!, props.blockchain)
                 const data = response.result
                 let names = []
                 let positions = []
@@ -27,7 +27,7 @@ export default function Protocols() {
             };
             fetchNFTs()
         }
-    }, []);
+    }, [props.blockchain]);
 
     return (
         <TabPanel>

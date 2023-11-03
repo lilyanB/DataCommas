@@ -1,11 +1,13 @@
 "use client";
 
 import { useSDK } from "@metamask/sdk-react-ui";
-import { Card, Flex, TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
+import { Card, TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { transactions } from "@/outils/getData";
+import Link from "next/link";
+import { networks } from "@/outils/networks";
 
-export default function Transactions() {
+export default function Transactions(props: { blockchain: string }) {
     const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
     const [hash, setHash] = useState<string[]>([]);
@@ -15,9 +17,9 @@ export default function Transactions() {
     const [value, setValue] = useState<string[]>([]);
 
     useEffect(() => {
-        if (connected) {
+        if (connected && props.blockchain) {
             const fetchNFTs = async () => {
-                const response = await transactions(whale!, "Base")
+                const response = await transactions(whale!, props.blockchain)
                 const data = response.result
                 let hashs = []
                 let froms = []
@@ -36,11 +38,10 @@ export default function Transactions() {
                 setTo(tos)
                 setMethod(methods)
                 setValue(values)
-                console.log(data)
             };
             fetchNFTs()
         }
-    }, []);
+    }, [props.blockchain]);
 
     return (
         <TabPanel>
@@ -59,12 +60,14 @@ export default function Transactions() {
                     <TableBody>
                         {hash.map((hashValue, index) => (
                             <TableRow key={index}>
-                                <TableCell>{hash[index]}</TableCell>
                                 <TableCell>
-                                    <Text>{from[index]}</Text>
+                                    <Link href={`${networks[props.blockchain].explorer}tx/${hash[index]}`} target="_blank" className="hover:text-white">{hash[index]}</Link>
                                 </TableCell>
                                 <TableCell>
-                                    <Text>{to[index]}</Text>
+                                    <Link href={`${networks[props.blockchain].explorer}address/${from[index]}`} target="_blank" className="hover:text-white">{from[index]}</Link>
+                                </TableCell>
+                                <TableCell>
+                                    <Link href={`${networks[props.blockchain].explorer}address/${to[index]}`} target="_blank" className="hover:text-white">{to[index]}</Link>
                                 </TableCell>
                                 <TableCell>
                                     <Text>{method[index]}</Text>
@@ -77,6 +80,6 @@ export default function Transactions() {
                     </TableBody>
                 </Table>
             </Card>
-        </TabPanel>
+        </TabPanel >
     );
 }

@@ -5,7 +5,7 @@ import { Card, Flex, TabPanel, Text, Title } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { erc20tokens } from "@/outils/getData";
 
-export default function ListERC20() {
+export default function ListERC20(props: { blockchain: string }) {
     const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
     const [assetsName, setassetsName] = useState<string[]>([]);
@@ -13,9 +13,9 @@ export default function ListERC20() {
     const [amounts, setAmounts] = useState<string[]>([]);
 
     useEffect(() => {
-        if (connected) {
+        if (connected && props.blockchain) {
             const fetchNFTs = async () => {
-                const response = await erc20tokens(whale!, "Base")
+                const response = await erc20tokens(whale!, props.blockchain)
                 const data = response.result
                 let names = []
                 let symbols = []
@@ -32,7 +32,7 @@ export default function ListERC20() {
             };
             fetchNFTs()
         }
-    }, []);
+    }, [props.blockchain]);
 
     return (
         <TabPanel>
