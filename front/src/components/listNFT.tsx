@@ -7,16 +7,15 @@ import { nfts } from "@/outils/getData";
 import Link from "next/link";
 import { networks } from "@/outils/networks";
 
-export default function ListNFT(props: { blockchain: string }) {
-    const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS;
+export default function ListNFT(props: { blockchain: string; owner: string }) {
     const { connected } = useSDK();
     const [nftData, setNFTData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            if (connected && props.blockchain) {
+            if (connected && props.blockchain && props.owner) {
                 try {
-                    const response = await nfts(whale!, props.blockchain);
+                    const response = await nfts(props.owner, props.blockchain);
                     console.log(response)
                     setNFTData(response.result);
                 } catch (error) {
@@ -25,7 +24,7 @@ export default function ListNFT(props: { blockchain: string }) {
             }
         };
         fetchData();
-    }, [props.blockchain, connected]);
+    }, [props.blockchain, props.owner, connected]);
 
     return (
         <TabPanel>

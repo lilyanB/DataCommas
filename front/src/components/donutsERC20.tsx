@@ -1,7 +1,8 @@
 "use client";
 
 import React, { Key, useEffect, useState } from "react";
-import { Card, DonutChart, Select, SelectItem, Title, Text } from "@tremor/react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { Card, DonutChart, Select, SelectItem, Title, Text, Button, Callout, Flex } from "@tremor/react";
 import Link from "next/link";
 import { tokens_holders } from "@/outils/getData";
 import { networks } from "@/outils/networks";
@@ -57,7 +58,7 @@ export default function DonutsERC20(props: { tokens: Token[]; blockchain: string
     const valueFormatter = (number: number | bigint) => `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
 
     return (
-        <Card className="justify-items-center max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
+        <Card className="justify-items-center max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl mt-4">
             <Select value={selectedToken} onValueChange={setSelectedToken}>
                 {props.tokens.map((token: any, index: Key) => (
                     <SelectItem key={index} value={token}>
@@ -67,9 +68,9 @@ export default function DonutsERC20(props: { tokens: Token[]; blockchain: string
             </Select>
             {selectedToken && (
                 <>
-                    <Title className="justify-items-center">Holders for {selectedToken.name}</Title>
+                    <Title className="justify-items-center mt-4">Holders for {selectedToken.name}</Title>
                     {tokenHolders && (
-                        <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
+                        <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl mt-4">
                             <DonutChart
                                 variant="pie"
                                 className="mt-6"
@@ -85,19 +86,35 @@ export default function DonutsERC20(props: { tokens: Token[]; blockchain: string
                     )}
                     {selectedValue && (
                         <>
-                            <Card>
-                                <Text>
-                                    Holder :{" "}
-                                    <Link href={`${(networks as any)[props.blockchain].explorer}address/${selectedValue.address}`} target="_blank" className="hover:text-white">
-                                        {selectedValue.address}
+                            <Card className="mt-4">
+                                <Text className="mb-2 text-center">Holder: {selectedValue.address}</Text>
+                                <Text className="mb-2 text-center">% of Total Supply: {((selectedValue.amount / tokenHolders.totalAmount) * 100).toFixed(2)}%</Text>
+
+                                {selectedValue.amount / tokenHolders.totalAmount * 100 > 50 && (
+                                    <Callout title="Critical %" icon={ExclamationTriangleIcon} color="red" className="mb-4">
+                                        This holder has more than 50% of the supply of this asset.
+                                    </Callout>
+                                )}
+
+                                <div className="flex flex-col md:flex-row justify-center items-center">
+                                    <Link href={`/wallet/${selectedValue.address}`} className="px-2 py-2 mt-2 hover:text-white">
+                                        <Button className="bg-blue-500 hover:bg-blue-700 text-white rounded-md" size="md">
+                                            View wallet of this holder
+                                        </Button>
                                     </Link>
-                                </Text>
-                                <Text>% of Total Supply : {(selectedValue.amount / tokenHolders.totalAmount) * 100}%</Text>
+
+                                    <Link href={`${(networks as any)[props.blockchain].explorer}address/${selectedValue.address}`} target="_blank" className="px-2 py-2 mt-2 hover:text-white">
+                                        <Button className="bg-blue-500 hover:bg-blue-700 text-white rounded-md" size="md">
+                                            Wallet on {(networks as any)[props.blockchain].explorer}
+                                        </Button>
+                                    </Link>
+                                </div>
+
                             </Card>
                         </>
                     )}
                 </>
             )}
         </Card>
-    );
+    )
 }

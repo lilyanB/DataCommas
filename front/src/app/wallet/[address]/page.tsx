@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import ListERC20 from "@/components/listERC20";
 import ListNFT from "@/components/listNFT";
@@ -19,7 +19,7 @@ import {
 } from "@tremor/react";
 import { Key, useState } from "react";
 
-export default function Page() {
+export default function Page({ params }: { params: { address: string } }) {
 
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
 
@@ -44,8 +44,8 @@ export default function Page() {
                     {connected && (
                         <>
                             <Card className="max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-7xl">
-                                <Title>You are connected</Title>
-                                <Badge size="xl">{account}</Badge>
+                                <Title>You visualize this wallet</Title>
+                                <Badge size="xl">{params.address}</Badge>
                                 <Title>Select Network</Title>
                                 <Select value={selectedBlockchain} onValueChange={setSelectedBlockchain}>
                                     {networks.names.map((name: any, index: Key) => (
@@ -62,10 +62,10 @@ export default function Page() {
                                         <Tab>Protocols</Tab>
                                     </TabList>
                                     <TabPanels>
-                                        <Transactions blockchain={selectedBlockchain} owner={account!} />
-                                        <ListERC20 blockchain={selectedBlockchain} owner={account!} />
-                                        <ListNFT blockchain={selectedBlockchain} owner={account!} />
-                                        <Protocols blockchain={selectedBlockchain} owner={account!} />
+                                        <Transactions blockchain={selectedBlockchain} owner={params.address} />
+                                        <ListERC20 blockchain={selectedBlockchain} owner={params.address} />
+                                        <ListNFT blockchain={selectedBlockchain} owner={params.address} />
+                                        <Protocols blockchain={selectedBlockchain} owner={params.address} />
                                     </TabPanels>
                                 </TabGroup>
                             </Card>
@@ -76,3 +76,4 @@ export default function Page() {
         </main>
     )
 }
+

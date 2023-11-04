@@ -7,16 +7,15 @@ import Link from "next/link";
 import { networks } from "@/outils/networks";
 import { transactions } from "@/outils/getData";
 
-export default function Transactions(props: { blockchain: string }) {
-    const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS;
+export default function Transactions(props: { blockchain: string; owner: string }) {
     const { connected } = useSDK();
     const [transactionsData, setTransactionsData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            if (connected && props.blockchain) {
+            if (connected && props.blockchain && props.owner) {
                 try {
-                    const response = await transactions(whale!, props.blockchain);
+                    const response = await transactions(props.owner, props.blockchain);
                     setTransactionsData(response.result);
                 } catch (error) {
                     console.error("Error fetching transactions:", error);
@@ -24,7 +23,7 @@ export default function Transactions(props: { blockchain: string }) {
             }
         };
         fetchData();
-    }, [props.blockchain, connected]);
+    }, [props.blockchain, props.owner, connected]);
 
     return (
         <TabPanel>

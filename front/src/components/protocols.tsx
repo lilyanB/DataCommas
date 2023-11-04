@@ -5,17 +5,16 @@ import { Flex, TabPanel, TableBody, TableCell, TableHead, TableHeaderCell, Table
 import { useEffect, useState } from "react";
 import { protocols } from "@/outils/getData";
 
-export default function Protocols(props: { blockchain: string }) {
-    const whale = process.env.NEXT_PUBLIC_EXAMPLE_ADDRESS
+export default function Protocols(props: { blockchain: string; owner: string }) {
     const { sdk, connected, connecting, provider, chainId, account, balance } = useSDK();
     const [names, setNames] = useState<string[]>([]);
     const [positions, setPositions] = useState<string[]>([]);
 
     useEffect(() => {
-        if (connected && props.blockchain) {
+        if (connected && props.blockchain && props.owner) {
             const fetchNFTs = async () => {
                 try {
-                    const response = await protocols(whale!, props.blockchain);
+                    const response = await protocols(props.owner, props.blockchain);
                     const data = response.result;
                     const names = data.map((element: { protocol_name: string; }) => element.protocol_name as string);
                     const positions = data.map(
@@ -29,7 +28,7 @@ export default function Protocols(props: { blockchain: string }) {
             };
             fetchNFTs();
         }
-    }, [props.blockchain, connected]);
+    }, [props.blockchain, props.owner, connected]);
 
     return (
         <TabPanel>
