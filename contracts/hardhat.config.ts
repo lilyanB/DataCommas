@@ -3,7 +3,7 @@ require("dotenv").config();
 const { PRIVATE_KEY, INFURA_API_KEY } = process.env;
 
 module.exports = {
-  solidity: "0.8.19",
+  solidity: "0.8.20",
   networks: {
     linea_testnet: {
       url: `https://linea-goerli.infura.io/v3/${INFURA_API_KEY}`,
