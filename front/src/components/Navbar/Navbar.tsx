@@ -5,6 +5,7 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
 import { MetaMaskButton } from "@metamask/sdk-react-ui";
+import { useMetamaskHook } from '@/hooks/metamaskHook';
 
 interface NavigationItem {
     name: string;
@@ -26,6 +27,7 @@ function classNames(...classes: string[]) {
 const Navbar = () => {
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const { provider, chainID, switchToLinea } = useMetamaskHook()
 
     return (
         <Disclosure as="nav" className="navbar">
@@ -74,7 +76,7 @@ const Navbar = () => {
 
                             </div>
                             <div className='hidden lg:flex justify-end text-xl font-semibold py-4 px-6 lg:px-12'>
-                                <MetaMaskButton theme="dark" color="white" />
+                                {chainID != "0xe704" ? <button onClick={switchToLinea} className="border-2 border-red-500 hover:border-white hover:text-white text-red py-2 px-4 rounded">Switch to Linea</button> : <MetaMaskButton theme="dark" color="white" />}
                             </div>
                             {/* <Contactusform /> */}
                         </div>

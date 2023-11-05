@@ -86,9 +86,9 @@ export default function DonutsERC20(props: { tokens: Token[]; blockchain: string
                     )}
                     {selectedValue && (
                         <>
-                            <Card className="mt-4">
-                                <Text className="mb-2 text-center">Holder: {selectedValue.address}</Text>
-                                <Text className="mb-2 text-center">% of Total Supply: {((selectedValue.amount / tokenHolders.totalAmount) * 100).toFixed(2)}%</Text>
+                            <Card className="mt-4 text-red">
+                                <h1 className="mb-2 text-center text-white">Holder: {selectedValue.address}</h1>
+                                <h1 className="mb-2 text-center text-white">% of Total Supply: {((selectedValue.amount / tokenHolders.totalAmount) * 100).toFixed(2)}%</h1>
 
                                 {selectedValue.amount / tokenHolders.totalAmount * 100 > 50 && (
                                     <Callout title="Critical %" icon={ExclamationTriangleIcon} color="red" className="mb-4">
@@ -98,14 +98,14 @@ export default function DonutsERC20(props: { tokens: Token[]; blockchain: string
 
                                 <div className="flex flex-col md:flex-row justify-center items-center">
                                     <Link href={`/wallet/${selectedValue.address}`} className="px-2 py-2 mt-2 hover:text-white">
-                                        <Button className="bg-blue-500 hover:bg-blue-700 text-white rounded-md" size="md">
-                                            View wallet of this holder
+                                        <Button className="bg-blue-500 hover:bg-blue-700 rounded-md" size="md">
+                                            <p className="text-white">View wallet of this holder</p>
                                         </Button>
                                     </Link>
 
                                     <Link href={`${(networks as any)[props.blockchain].explorer}address/${selectedValue.address}`} target="_blank" className="px-2 py-2 mt-2 hover:text-white">
-                                        <Button className="bg-blue-500 hover:bg-blue-700 text-white rounded-md" size="md">
-                                            Wallet on {(networks as any)[props.blockchain].explorer}
+                                        <Button className="bg-blue-500 hover:bg-blue-700 rounded-md" size="md">
+                                            <p className="text-white">Wallet on {(networks as any)[props.blockchain].explorer}</p>
                                         </Button>
                                     </Link>
                                 </div>
