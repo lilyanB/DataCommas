@@ -1,3 +1,6 @@
+
+![winners](https://github.com/lilyanB/Pulsar/assets/91454320/eb3f527d-6edc-4ffd-88c2-d7ab05459305)
+
 # Pulsar
 
 ![logo](front/public/images/banner.png)
